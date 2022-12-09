@@ -1,0 +1,27 @@
+[
+    {
+        "totalFeatures": 3,
+        "displayedFeatures": 3,
+        "endY": 125,
+        "startY": 85,
+        "type": "box",
+        "data": [
+            {
+                "end": 17,
+                "start": 13,
+                "counter": 9,
+                "index": 0,
+                "outline": "black",
+                "data": [
+                    [
+                        13,
+                        17
+                    ]
+                ],
+                "id": "df1.1",
+                "fill": "yellow",
+                "key": 99000003
+            }
+        ]
+    }
+]

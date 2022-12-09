@@ -1,0 +1,13 @@
+{
+  "accepts": ["id"],
+  "classes": ["GeneticMap"],
+  "files" : {
+    "css" : "dist/style.css",
+    "js" : "dist/bundle.js"
+  },
+  "toolName" : {
+    "human" :"LIS Genetic Map Plot",
+    "cljs" :"lisGeneticMapPlot"    
+  },
+  "version": 2
+}

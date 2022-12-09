@@ -1,0 +1,19 @@
+[
+    {
+        "totalFeatures": 8,
+        "displayedFeatures": 8,
+        "endY": 65,
+        "startY": 50,
+        "type": "triangle",
+        "data": [
+            {
+                "counter": 5,
+                "index": 4,
+                "outline": "black",
+                "offset": 18.2,
+                "id": "BMd10",
+                "fill": "darkred"
+            }
+        ]
+    }
+]

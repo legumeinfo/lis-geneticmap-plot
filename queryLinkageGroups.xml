@@ -1,0 +1,3 @@
+<query name="" model="genomic" view="LinkageGroup.identifier LinkageGroup.number LinkageGroup.length" longDescription="" sortOrder="LinkageGroup.identifier asc">
+  <constraint path="LinkageGroup.geneticMap.primaryIdentifier" op="=" value="BAT93_x_JALOEEP558.Freyre_Skroch_1998"/>
+</query>
