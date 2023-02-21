@@ -49,18 +49,15 @@
 // }
 
 // linkageGroups
-// {"identifier":"B10","number":10,"length":105,"class":"LinkageGroup","objectId":93000004}
 // markers
-// {"linkageGroup":{"identifier":"B03","class":"LinkageGroup","objectId":93000008},"position":12.8,"class":"LinkageGroupPosition","markerName":"BM189","objectId":93000015}
 // qtls
-// {"identifier":"Int1","start":21,"linkageGroup":{"identifier":"B03","class":"LinkageGroup","objectId":93000008},"end":37,"class":"QTL","objectId":101000003}
 
 
 /**
  * Return a ChartXpress data object for the linkage group plot.
  */
 export default function getData(linkageGroups, markers, qtls) {
-    if (!linkageGroups) {
+    if (!linkageGroups || !markers) {
         return null;
     }
 
@@ -72,6 +69,7 @@ export default function getData(linkageGroups, markers, qtls) {
 
     const tracks = [];
 
+    // { "identifier":"B10", "number":10, "length":105, "class":"LinkageGroup", "objectId":93000004 }
     sortedLGs.map(linkageGroup => {
         const lgData = [
             {
@@ -93,30 +91,30 @@ export default function getData(linkageGroups, markers, qtls) {
         };
         tracks.push(lgTrack);
         
-        if (markers) {
-            // this is inefficient
-            const markerData = [];
-            markers.map(marker => {
-                if (marker.linkageGroup.objectId === linkageGroup.objectId) {
-                    markerData.push({
-                        "fill": "darkred",
-                        "id": marker.markerName,
-                        "offset": marker.position,
-                        "outline": "black"
-                    });
-                }
-            });
-            if (markerData.length>0) {
-                const markerTrack = {
-                    "type": "triangle",
-                    "data": markerData
-                };
-                tracks.push(markerTrack);
+        // { "linkageGroup":{"identifier":"B03", "class":"LinkageGroup", "objectId":93000008}, "position":12.8, "class":"LinkageGroupPosition", "markerName":"BM189", "objectId":93000015 }
+        // this is inefficient
+        const markerData = [];
+        markers.map(marker => {
+            if (marker.linkageGroup.objectId === linkageGroup.objectId) {
+                markerData.push({
+                    "fill": "darkred",
+                    "id": marker.markerName,
+                    "offset": marker.position,
+                    "outline": "black"
+                });
             }
+        });
+        if (markerData.length>0) {
+            const markerTrack = {
+                "type": "triangle",
+                "data": markerData
+            };
+            tracks.push(markerTrack);
         }
         
+        // { "identifier":"Int1", "start":21, "linkageGroup":{"identifier":"B03","class":"LinkageGroup","objectId":93000008}, "end":37, "class":"QTL", "objectId":101000003 }
+        // this is also inefficient
         if (qtls) {
-            // this is also inefficient
             const qtlData = [];
             qtls.map(qtl => {
                 if (qtl.linkageGroup.objectId === linkageGroup.objectId) {
@@ -137,10 +135,7 @@ export default function getData(linkageGroups, markers, qtls) {
                 tracks.push(qtlTrack);
             }
         }
-        
     });
 
-    return {
-        "tracks": tracks
-    };
+    return { "tracks": tracks };
 }

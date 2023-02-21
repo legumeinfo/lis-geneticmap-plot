@@ -19,13 +19,6 @@ export default function queryQTLs(geneticMapId, serviceUrl, imjsClient = imjs) {
     });
 }
 
-// QTL.identifier
-// QTL.linkageGroup.identifier
-// QTL.start
-// QTL.end
-// sortOrder="QTL.linkageGroup.identifier asc">
-// <constraint path="QTL.linkageGroup.geneticMap.primaryIdentifier" op="=" value="G2333_x_G19839.Checa_Blair_2008"/>
-    
 const pathQuery = ({ geneticMapId }) => ({
     from: 'QTL',
     select: [

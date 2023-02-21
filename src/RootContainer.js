@@ -10,16 +10,15 @@ import getData from "./getData";
 
 export default function RootContainer({ serviceUrl, entity, config }) {
     const geneticMapId = entity.value;
-    const [error, setError] = useState(null);
 
+    const [error, setError] = useState(null);
     const [linkageGroups, setLinkageGroups] = useState(null);
     const [markers, setMarkers] = useState(null);
     const [qtls, setQtls] = useState(null);
-
     const [data, setData] = useState(null);
     
     useEffect(() => {
-        // query linkage groups for this genetic map
+        // linkage groups
         const linkageGroups = [];
         queryLinkageGroups(geneticMapId, serviceUrl)
             .then(response => {
@@ -31,7 +30,7 @@ export default function RootContainer({ serviceUrl, entity, config }) {
             .catch(() => {
                 setError("LinkageGroup data not found for GeneticMap.id="+geneticMapId);
             });
-        // query markers for this genetic map
+        // all markers
         const markers = [];
         queryMarkers(geneticMapId, serviceUrl)
             .then(response => {
@@ -43,7 +42,7 @@ export default function RootContainer({ serviceUrl, entity, config }) {
             .catch(() => {
                 setError("Marker data not found for GeneticMap.id="+geneticMapId);
             });
-        // query QTLs for this genetic map
+        // all QTLs
         const qtls = [];
         queryQTLs(geneticMapId, serviceUrl)
             .then(response => {
@@ -53,19 +52,19 @@ export default function RootContainer({ serviceUrl, entity, config }) {
                 setQtls(qtls);
             })
             .catch(() => {
-                setError("QTL data not found for GeneticMap.id="+geneticMapId);
+                // do nothing, some maps do not have QTLs
             });
     }, []);
+
+    if (error) return (
+        <div className="rootContainer error">{ error }</div>
+    );
 
     // track data
     useEffect(() => {
         setData(getData(linkageGroups, markers, qtls));
     }, [linkageGroups, markers, qtls]);
     
-    if (error) return (
-        <div className="rootContainer error">{ error }</div>
-    );
-
     // (mostly) static canvasXpress config
     const conf = {
         "graphType": "Genome",

@@ -19,13 +19,6 @@ export default function queryMarkers(geneticMapId, serviceUrl, imjsClient = imjs
     });
 }
 
-// LinkageGroupPosition.linkageGroup.identifier
-// LinkageGroupPosition.markerName
-// LinkageGroupPosition.position
-// LinkageGroupPosition.linkageGroup.geneticMap.primaryIdentifier
-// sortOrder="LinkageGroupPosition.linkageGroup.identifier asc">
-// LinkageGroupPosition.linkageGroup.geneticMap.primaryIdentifier" op="=" value="BAT93_x_JALOEEP558.Freyre_Skroch_1998"/>
-
 const pathQuery = ({ geneticMapId }) => ({
     from: 'LinkageGroupPosition',
     select: [
